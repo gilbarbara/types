@@ -1,0 +1,55 @@
+{
+  "name": "@gilbarbara/types",
+  "version": "0.0.0",
+  "description": "Reusable typescript typings",
+  "author": "Gil Barbara <gilbarbara@gmail.com>",
+  "keywords": [
+    "typescript",
+    "typings"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gilbarbara/types"
+  },
+  "bugs": {
+    "url": "https://github.com/gilbarbara/types/issues"
+  },
+  "homepage": "https://github.com/gilbarbara/types",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "types": "./lib",
+  "sideEffects": false,
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@gilbarbara/eslint-config": "^0.2.1",
+    "@gilbarbara/prettier-config": "^0.1.0",
+    "@gilbarbara/tsconfig": "^0.1.0",
+    "del-cli": "^4.0.1",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "repo-tools": "^0.2.2",
+    "ts-node": "^10.7.0",
+    "type-fest": "^2.12.2",
+    "typescript": "^4.6.3"
+  },
+  "scripts": {
+    "build": "npm run clear && npm run build:lib",
+    "build:lib": "tsc",
+    "clear": "del lib/*",
+    "lint": "eslint --ext .ts,.tsx src",
+    "typecheck": "tsc --noEmit",
+    "validate": "npm run lint && npm run typecheck && npm run build",
+    "prepare": "husky install",
+    "prepublishOnly": "npm run validate"
+  },
+  "eslintConfig": {
+    "extends": [
+      "@gilbarbara/eslint-config"
+    ]
+  },
+  "prettier": "@gilbarbara/prettier-config"
+}

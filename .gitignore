@@ -1,0 +1,6 @@
+.env
+
+coverage
+esm
+lib
+node_modules
