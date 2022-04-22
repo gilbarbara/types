@@ -12,23 +12,6 @@ npm i @gilbarbara/types
 
 ## Types
 
-```typescript
-type AnyObject<T = any> = Record<string, T>;
-type PlainObject<T extends AnyObject> = Exclude<
-  T,
-  Array<unknown> | Function | Map<unknown, unknown> | Set<unknown>
->;
-```
-
-`AnyObject` includes arrays, functions and other types because of the prototype. If you really wants to use just plain objects you'll need to narrow it down:
-
-```typescript
-function parseParams <T extends AnyObject>(input: PlainObject<T>) {
-  // now you can be sure the input is a plain object
-  return input;
-}
-```
-
 ### Aliases
 
 ```typescript
@@ -37,9 +20,12 @@ type StringOrNull = string | null;
 type StringOrNumber = string | number;
 ```
 
+
 ### Async
 
 ```typescript
+type AsyncStatus = 'IDLE' | 'PENDING' | 'SUCCESS' | 'ERROR';
+
 interface AsyncFlow {
   message: string;
   status: AsyncStatus;
@@ -57,8 +43,59 @@ interface AsyncFlowWithDataAndCache<T = any> extends AsyncFlowWithData<T> {
 ### Generic
 
 ```typescript
-type GenericFunction<T = void> = (...arguments_: any[]) => T;
+type AnyObject<T = any> = Record<string, T>;
+type PlainObject<T extends AnyObject> = Exclude<
+  T,
+  Array<unknown> | Function | Map<unknown, unknown> | Set<unknown>
+>;
+```
 
+`AnyObject` includes arrays, functions and other types because of the prototype. If you really wants to use just plain objects you'll need to narrow it down:
+
+```typescript
+function parseParams <T extends AnyObject>(input: PlainObject<T>) {
+  // now you can be sure the input is a plain object
+  return input;
+}
+```
+
+```typescript
+type GenericFunction<T = void> = (...arguments: any[]) => T;
+
+type VoidFunction = () => void;
+
+type HttpMethods =
+  | 'CONNECT'
+  | 'DELETE'
+  | 'GET'
+  | 'HEAD'
+  | 'OPTIONS'
+  | 'PATCH'
+  | 'POST'
+  | 'PUT';
+
+/**
+ * Primitive types
+ */
+type Primitive = bigint | boolean | null | number | string | symbol | undefined;
+
+/**
+ * A union of all possible strings returned by the typeof operator.
+ */
+type TypeName =
+  | 'bigint'
+  | 'boolean'
+  | 'function'
+  | 'number'
+  | 'object'
+  | 'string'
+  | 'symbol'
+  | 'undefined'
+```
+
+### Interfaces
+
+```typescript
 interface IdName {
   id: string;
   name: string;
@@ -70,3 +107,4 @@ interface LabelValue {
 }
 
 ```
+
