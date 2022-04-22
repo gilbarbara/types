@@ -1,5 +1,7 @@
 # @gilbarbara/types
 
+[![npm version](https://badge.fury.io/js/%40gilbarbara%2Ftypes.svg)](https://badge.fury.io/js/%40gilbarbara%2Ftypes) [![CI](https://github.com/gilbarbara/types/actions/workflows/main.yml/badge.svg)](https://github.com/gilbarbara/types/actions/workflows/main.yml)
+
 Reusable typescript typings.
 
 ## Setup
