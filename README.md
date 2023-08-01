@@ -18,10 +18,15 @@ npm i @gilbarbara/types
 type NumberOrNull = number | null;
 type StringOrNull = string | null;
 type StringOrNumber = string | number;
+
+type PlainObject<T = unknown> = Record<string, T>;
+
+type GenericFunction<T = unknown> = (...arguments_: any[]) => T;
+type VoidFunction = () => void;
 ```
 
 
-### Async
+### Common
 
 ```typescript
 type AsyncStatus = 'IDLE' | 'PENDING' | 'SUCCESS' | 'ERROR';
@@ -38,31 +43,6 @@ interface AsyncFlowWithData<T = any> extends AsyncFlow {
 interface AsyncFlowWithDataAndCache<T = any> extends AsyncFlowWithData<T> {
   updatedAt: number;
 }
-```
-
-### Generic
-
-```typescript
-type AnyObject<T = any> = Record<string, T>;
-type PlainObject<T extends AnyObject> = Exclude<
-  T,
-  Array<unknown> | Function | Map<unknown, unknown> | Set<unknown>
->;
-```
-
-`AnyObject` includes arrays, functions and other types because of the prototype. If you really wants to use just plain objects you'll need to narrow it down:
-
-```typescript
-function parseParams <T extends AnyObject>(input: PlainObject<T>) {
-  // now you can be sure the input is a plain object
-  return input;
-}
-```
-
-```typescript
-type GenericFunction<T = void> = (...arguments: any[]) => T;
-
-type VoidFunction = () => void;
 
 type HttpMethods =
   | 'CONNECT'
@@ -74,28 +54,6 @@ type HttpMethods =
   | 'POST'
   | 'PUT';
 
-/**
- * Primitive types
- */
-type Primitive = bigint | boolean | null | number | string | symbol | undefined;
-
-/**
- * A union of all possible strings returned by the typeof operator.
- */
-type TypeName =
-  | 'bigint'
-  | 'boolean'
-  | 'function'
-  | 'number'
-  | 'object'
-  | 'string'
-  | 'symbol'
-  | 'undefined'
-```
-
-### Interfaces
-
-```typescript
 interface IdName {
   id: string;
   name: string;
@@ -105,6 +63,25 @@ interface LabelValue {
   label: string;
   value: string;
 }
+```
 
+### Utilities
+
+```typescript
+/**
+ * An object without excluded types.
+ */
+type RemoveType<TObject, TExclude = undefined> = {
+  [Key in keyof TObject as TObject[Key] extends TExclude ? never : Key]: TObject[Key];
+};
+```
+
+```typescript
+/**
+ * A strict plain object with a specific set of keys.
+ */
+type StrictObject<TObject extends Record<PropertyKey, unknown>, TExpected> = TExpected & {
+  [Key in keyof TObject]: Key extends keyof TExpected ? TExpected[Key] : never;
+};
 ```
 
