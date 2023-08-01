@@ -10,6 +10,8 @@ Reusable typescript typings.
 npm i @gilbarbara/types
 ```
 
+For convenience, the `type-fest` package is re-exported.
+
 ## Types
 
 ### Aliases
