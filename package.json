@@ -23,7 +23,9 @@
   "types": "./dist",
   "sideEffects": false,
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "type-fest": "^4.1.0"
+  },
   "devDependencies": {
     "@gilbarbara/eslint-config": "^0.5.1",
     "@gilbarbara/prettier-config": "^1.0.0",
@@ -37,7 +39,6 @@
     "repo-tools": "^0.2.2",
     "ts-jest": "^29.1.1",
     "ts-node": "^10.9.1",
-    "type-fest": "^4.1.0",
     "typescript": "^5.1.6"
   },
   "scripts": {
