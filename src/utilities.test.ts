@@ -1,6 +1,27 @@
 import { expectTypeOf } from 'expect-type';
 
-import { RemoveType, StrictObject } from './utilities';
+import { NarrowPlainObject, RemoveType, StrictObject } from './utilities';
+
+describe('NarrowPlainObject', () => {
+  interface User {
+    id: number;
+    name: string;
+  }
+
+  const getUser = <T extends Record<string, any>>(data: NarrowPlainObject<T>): User => {
+    const { id, name } = data;
+
+    return { id, name };
+  };
+
+  it('should match a plain object', () => {
+    expectTypeOf({ id: 1, name: 'John' }).toEqualTypeOf<NarrowPlainObject<User>>();
+  });
+
+  it('should narrow down a Record to a plain object', () => {
+    expectTypeOf(getUser({ id: 1, name: 'John', age: 30 })).toMatchTypeOf<User>();
+  });
+});
 
 describe('RemoveType', () => {
   type Test = { a: number; b: undefined; c: null; d: string };

@@ -71,6 +71,16 @@ interface LabelValue {
 
 ```typescript
 /**
+ * Narrow down a Record to a plain object.
+ */
+type NarrowPlainObject<T extends Record<string, any>> = Exclude<
+  T,
+  Array<unknown> | Function | Map<unknown, unknown> | Set<unknown>
+>;
+```
+
+```typescript
+/**
  * An object without excluded types.
  */
 type RemoveType<TObject, TExclude = undefined> = {

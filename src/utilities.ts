@@ -1,4 +1,13 @@
 /**
+ * Narrow down a Record to a plain object.
+ */
+export type NarrowPlainObject<T extends Record<string, any>> = Exclude<
+  T,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  Array<unknown> | Function | Map<unknown, unknown> | Set<unknown>
+>;
+
+/**
  * An object without excluded types.
  */
 export type RemoveType<TObject, TExclude = undefined> = {
