@@ -5,6 +5,10 @@ export interface AsyncFlow {
   status: AsyncStatus;
 }
 
+export interface AsyncFlowWithCache extends AsyncFlow {
+  updatedAt: number;
+}
+
 export interface AsyncFlowWithData<T = any> extends AsyncFlow {
   data: T;
 }

@@ -2,6 +2,7 @@ import { expectTypeOf } from 'expect-type';
 
 import {
   AsyncFlow,
+  AsyncFlowWithCache,
   AsyncFlowWithData,
   AsyncFlowWithDataAndCache,
   IdName,
@@ -24,6 +25,16 @@ describe('AsyncFlowWithData', () => {
       message: 'test',
       status: 'IDLE' as const,
     }).toMatchTypeOf<AsyncFlowWithData>();
+  });
+});
+
+describe('AsyncFlowWithCache', () => {
+  it('should match properly', () => {
+    expectTypeOf({
+      message: 'test',
+      status: 'IDLE' as const,
+      updatedAt: 123456789,
+    }).toMatchTypeOf<AsyncFlowWithCache>();
   });
 });
 

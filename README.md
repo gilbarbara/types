@@ -38,6 +38,10 @@ interface AsyncFlow {
   status: AsyncStatus;
 }
 
+interface AsyncFlowWithCache extends AsyncFlow {
+  updatedAt: number;
+}
+
 interface AsyncFlowWithData<T = any> extends AsyncFlow {
   data: T;
 }
